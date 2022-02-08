@@ -1,0 +1,109 @@
+import React, { useRef } from "react";
+import { useGlobalContext } from "../context";
+import { HiClipboardCopy, HiOutlineStar, HiOutlineX } from "react-icons/hi";
+import {
+  ModalContainer,
+  Modal,
+  ImageWrapper,
+  Content,
+  BreedsContainer,
+  ButtonsContainer,
+  CloseIcon,
+  InfoItem,
+  InfoDiv,
+} from "./CatsModal.styled";
+
+//name it catsmodal
+const HomeModal = () => {
+  const {
+    state: { selected, breedList },
+
+    handleCloseCatsModal,
+    handleAddingToFavorites,
+    handleBreedClickFromModal,
+  } = useGlobalContext();
+
+  const urlButton = useRef();
+  const favoritesButton = useRef();
+
+  const copy = async (text) => {
+    await navigator.clipboard.writeText(text);
+    urlButton.current.textContent = "Copied to clipboard";
+  };
+
+  return (
+    <ModalContainer>
+      <Modal>
+        <CloseIcon onClick={handleCloseCatsModal}>
+          <HiOutlineX />
+        </CloseIcon>
+        <ImageWrapper>
+          <img src={selected.url} alt="" />
+        </ImageWrapper>
+        <Content>
+          <InfoDiv>
+            {selected.breeds.length > 0 ? (
+              <div>
+                <h5>{selected.breeds[0].name}</h5>
+                {Object.entries(selected.breeds[0])
+                  .filter((item) => {
+                    return (
+                      item[0] === "adaptability" ||
+                      item[0] === "intelligence" ||
+                      item[0] === "energy_level" ||
+                      item[0] === "dog_friendly"
+                    );
+                  })
+                  .map((item, index) => (
+                    <InfoItem key={index}>
+                      <span>{item[0].replace("_", " ")}</span>
+                      <span>{item[1]}</span>
+                    </InfoItem>
+                  ))}
+              </div>
+            ) : (
+              <h5>Sorry, no info available for this one</h5>
+            )}
+          </InfoDiv>
+          <BreedsContainer>
+            <p>You might also want to check the breeds below</p>
+            <div>
+              {breedList
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 5)
+                .map((item, index) => {
+                  return (
+                    <span
+                      key={index}
+                      onClick={() => handleBreedClickFromModal(item.id)}
+                    >
+                      {item.name}
+                    </span>
+                  );
+                })}
+            </div>
+          </BreedsContainer>
+          <ButtonsContainer>
+            <button onClick={() => copy(selected.url)} ref={urlButton}>
+              Copy URL
+              <span>
+                <HiClipboardCopy />
+              </span>
+            </button>
+            <button
+              onClick={() => handleAddingToFavorites(favoritesButton)}
+              ref={favoritesButton}
+            >
+              Add to favorites
+              <span>
+                <HiOutlineStar />
+              </span>
+            </button>
+          </ButtonsContainer>
+        </Content>
+      </Modal>
+    </ModalContainer>
+  );
+};
+
+export default HomeModal;
