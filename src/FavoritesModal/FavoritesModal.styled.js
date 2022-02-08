@@ -7,14 +7,17 @@ export const Modal = styled.div`
   overflow: hidden;
   text-align: center;
   position: relative;
+  width: 80%;
+  height: 80%;
 `;
 
 export const ImageWrapper = styled.div`
   width: 100%;
+  height: 100%;
 
   img {
     display: block;
-    object-fit: center;
+    object-fit: cover;
     width: 100%;
     height: 100%;
   }

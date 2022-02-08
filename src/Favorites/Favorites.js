@@ -11,6 +11,9 @@ const Favorites = () => {
 
   return (
     <Container>
+      {favoritesList.length === 0 && (
+        <h5>Not much in favorites. Add something</h5>
+      )}
       <Grid>
         {favoritesList &&
           favoritesList.map((item, index) => {

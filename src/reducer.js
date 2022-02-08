@@ -1,12 +1,19 @@
 const reducer = (state, action) => {
   if (action.type === "loading") {
-    return { ...state, isLoading: true };
+    return { ...state, isLoading: true, error: false };
+  }
+  if (action.type === "error-fetching") {
+    return { ...state, error: true, isLoading: false };
   }
   if (action.type === "fulfilled-cats") {
     return { ...state, catList: action.payload, isLoading: false };
   }
   if (action.type === "fulfilled-breeds") {
-    return { ...state, breedList: action.payload };
+    return {
+      ...state,
+      breedList: action.payload,
+      suggestedList: action.payload.sort(() => 0.5 - Math.random()).slice(0, 5),
+    };
   }
   if (action.type === "loadMore") {
     return { ...state, imagesAmount: state.imagesAmount + 10 };
@@ -17,6 +24,9 @@ const reducer = (state, action) => {
   }
   if (action.type === "close-cats-modal") {
     return { ...state, showCatsModal: false };
+  }
+  if (action.type === "close-breed-modal") {
+    return { ...state, showBreedsModal: false };
   }
   if (action.type === "add-to-favorites") {
     return {
@@ -59,6 +69,24 @@ const reducer = (state, action) => {
   }
   if (action.type === "close-favorite-modal") {
     return { ...state, showFavoritesModal: false };
+  }
+  if (action.type === "refresh-suggestions") {
+    return {
+      ...state,
+      suggestedList: state.breedList
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 5),
+    };
+  }
+  if (action.type === "open-themes-modal") {
+    return { ...state, showThemesModal: true };
+  }
+  if (action.type === "change-theme") {
+    return {
+      ...state,
+      theme: state.themes.find((theme) => theme.name === action.payload),
+      showThemesModal: false,
+    };
   }
   return state;
 };

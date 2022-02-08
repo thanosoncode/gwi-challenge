@@ -5,6 +5,12 @@ export const Container = styled.div`
   min-height: 100vh;
   max-width: 1000px;
   margin: 0 auto;
+  text-align: center;
+
+  h5 {
+    font-size: 19px;
+    margin-top: 100px;
+  }
 `;
 
 export const Grid = styled.div`

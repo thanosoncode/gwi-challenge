@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -9,16 +10,18 @@ export const ModalContainer = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-export const Modal = styled.div`
+export const Modal = styled(motion.div)`
   padding: 10px;
   border-radius: 5px;
-
+  position: relative;
   background: white;
   max-width: 380px;
   text-align: center;
+  background: ${({ theme }) => theme.bg2};
 
   h5 {
     margin-bottom: 10px;
+    color: ${({ theme }) => theme.color};
     font-size: 22px;
   }
 
@@ -49,4 +52,14 @@ export const Modal = styled.div`
     opacity: 0.9;
     transform: scale(1.1);
   }
+`;
+
+export const CloseIcon = styled.span`
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  font-size: 20px;
+
+  color: ${({ theme }) => theme.accent};
 `;

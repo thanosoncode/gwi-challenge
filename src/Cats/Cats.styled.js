@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const HomeContainer = styled.div`
+export const Container = styled.div`
   position: relative;
   min-height: 100vh;
   max-width: 1000px;
@@ -17,7 +18,7 @@ export const Grid = styled.div`
   gap: 20px;
 `;
 
-export const GridItem = styled.div`
+export const GridItem = styled(motion.div)`
   width: 200px;
   height: 200px;
 
@@ -35,4 +36,15 @@ export const Button = styled.button`
   flex: 0;
   width: 200px;
   margin: 40px auto;
+  color: ${({ theme }) => theme.accent};
+  background: ${({ theme }) => theme.bg2};
+  border: 1px solid ${({ theme }) => theme.accent};
+  transition: 0.3s ease;
+  font-weight: 600;
+
+  &:hover {
+    color: ${({ theme }) => theme.color};
+    background: ${({ theme }) => theme.accent};
+    border: 1px solid ${({ theme }) => theme.accent};
+  }
 `;

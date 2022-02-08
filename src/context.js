@@ -1,6 +1,7 @@
 import { createContext, useEffect, useContext, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import reducer from "./reducer";
+import { dark, eclipse, light, rainbow, coal, purple } from "./theme";
 
 const hundredCatsURL =
   "https://api.thecatapi.com/v1/images/search?limit=100&page=100&order=DESC";
@@ -12,14 +13,19 @@ const initialState = {
   catList: [],
   breedList: [],
   favoritesList: [],
+  suggestedList: [],
   isLoading: false,
+  error: false,
   imagesAmount: 10,
   showCatsModal: false,
   showBreedsModal: false,
   showFavoritesModal: false,
+  showThemesModal: false,
   selected: null,
   breedId: null,
   favoriteId: null,
+  theme: light,
+  themes: [dark, light, rainbow, coal, purple, eclipse],
 };
 
 export const AppContextProvider = ({ children }) => {
@@ -45,6 +51,10 @@ export const AppContextProvider = ({ children }) => {
     navigate("/");
   };
 
+  const handleThemesClick = () => {
+    dispatch({ type: "open-themes-modal" });
+  };
+
   const handleBreedClick = (item) => {
     const id = item.id;
     dispatch({ type: "breed-selected-from-breed-view", payload: id });
@@ -67,6 +77,10 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  const handleThemeChange = (value) => {
+    dispatch({ type: "change-theme", payload: value });
+  };
+
   const handleLoadMoreClick = () => {
     dispatch({ type: "loadMore" });
   };
@@ -79,13 +93,22 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: "close-cats-modal" });
   };
 
+  const handleRefreshSuggestions = () => {
+    dispatch({ type: "refresh-suggestions" });
+  };
+
+  const handleBreedModalClose = () => {
+    dispatch({ type: "close-breed-modal" });
+  };
+
   const asyncDispatchCats = (url) => {
     dispatch({ type: "loading" });
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: "fulfilled-cats", payload: data });
-      });
+      })
+      .catch((error) => dispatch({ type: "error-fetching" }));
   };
 
   const asyncDispatchBreeds = (url) => {
@@ -94,7 +117,8 @@ export const AppContextProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: "fulfilled-breeds", payload: data });
-      });
+      })
+      .catch((error) => dispatch({ type: "error-fetching" }));
   };
 
   useEffect(() => {
@@ -114,6 +138,10 @@ export const AppContextProvider = ({ children }) => {
     handleFavoritesItemClick,
     handleRemoveFromFavorites,
     handleCloseFavoriteModal,
+    handleRefreshSuggestions,
+    handleBreedModalClose,
+    handleThemesClick,
+    handleThemeChange,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

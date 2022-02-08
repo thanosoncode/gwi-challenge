@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
-import { ModalContainer, Modal } from "./BreedsModal.styled";
+import { ModalContainer, Modal, CloseIcon } from "./BreedsModal.styled";
+import { HiOutlineX } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 const BreedsModal = () => {
   const {
     state: { breedId },
     handleBreedImageClick,
+    handleBreedModalClose,
   } = useGlobalContext();
 
   const apiKey = "263165c6-7725-4722-a2ed-b4ab05df4364";
@@ -25,7 +28,15 @@ const BreedsModal = () => {
 
   return (
     <ModalContainer>
-      <Modal>
+      <Modal
+        as={motion.div}
+        initial={{ opacity: 0, y: -1000 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ y: -1000 }}
+      >
+        <CloseIcon onClick={handleBreedModalClose}>
+          <HiOutlineX />
+        </CloseIcon>
         <h5>{breedItems && breedItems[0]?.breeds[0]?.name}</h5>
         <section>
           {breedItems &&

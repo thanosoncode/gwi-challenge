@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled(motion.div)`
   position: fixed;
   inset: 0;
   display: flex;
@@ -9,14 +10,15 @@ export const ModalContainer = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-export const Modal = styled.div`
-  background: white;
+export const Modal = styled(motion.div)`
   display: flex;
 
   border-radius: 5px;
   overflow: hidden;
   text-align: center;
   position: relative;
+  color: ${({ theme }) => theme.color};
+  background: ${({ theme }) => theme.bg2};
 `;
 
 export const CloseIcon = styled.div`
@@ -24,6 +26,8 @@ export const CloseIcon = styled.div`
   right: 5px;
   top: 5px;
   cursor: pointer;
+  color: ${({ theme }) => theme.accent};
+  font-size: 22px;
 `;
 
 export const ImageWrapper = styled.div`
@@ -83,12 +87,13 @@ export const BreedsContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 10px;
+    margin-bottom: 10px;
   }
 
   span {
     padding: 5px 10px;
-    background: black;
-    color: white;
+    background: ${({ theme }) => theme.bg};
+    color: ${({ theme }) => theme.accent};
     border-radius: 999px;
     cursor: pointer;
     transition: 0.3s ease;
@@ -96,6 +101,20 @@ export const BreedsContainer = styled.div`
 
   span:hover {
     opacity: 0.8;
+  }
+
+  button {
+    padding: 3px 10px;
+    background: none;
+    border: 1px solid ${({ theme }) => theme.color};
+    color: ${({ theme }) => theme.color};
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.3s ease;
+  }
+  button:hover {
+    color: ${({ theme }) => theme.accent};
+    border: 1px solid ${({ theme }) => theme.accent};
   }
 `;
 
@@ -108,13 +127,20 @@ export const ButtonsContainer = styled.div`
   button {
     display: flex;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid ${({ theme }) => theme.color};
     padding: 9px 9px;
     width: 100%;
     justify-content: space-between;
     border-radius: 3px;
     cursor: pointer;
     background: transparent;
+    color: ${({ theme }) => theme.color};
+    transition: 0.3s ease;
+  }
+
+  button:hover {
+    color: ${({ theme }) => theme.accent};
+    border: 1px solid ${({ theme }) => theme.accent};
   }
 
   span {

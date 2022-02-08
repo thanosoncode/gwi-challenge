@@ -12,15 +12,16 @@ import {
   InfoItem,
   InfoDiv,
 } from "./CatsModal.styled";
+import { AnimatePresence, motion } from "framer-motion";
 
-//name it catsmodal
-const HomeModal = () => {
+const CatsModal = () => {
   const {
-    state: { selected, breedList },
+    state: { selected, suggestedList },
 
     handleCloseCatsModal,
     handleAddingToFavorites,
     handleBreedClickFromModal,
+    handleRefreshSuggestions,
   } = useGlobalContext();
 
   const urlButton = useRef();
@@ -32,8 +33,18 @@ const HomeModal = () => {
   };
 
   return (
-    <ModalContainer>
-      <Modal>
+    <ModalContainer
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Modal
+        as={motion.div}
+        initial={{ opacity: 0, y: -1000 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ y: -1000 }}
+      >
         <CloseIcon onClick={handleCloseCatsModal}>
           <HiOutlineX />
         </CloseIcon>
@@ -68,20 +79,20 @@ const HomeModal = () => {
           <BreedsContainer>
             <p>You might also want to check the breeds below</p>
             <div>
-              {breedList
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 5)
-                .map((item, index) => {
-                  return (
-                    <span
-                      key={index}
-                      onClick={() => handleBreedClickFromModal(item.id)}
-                    >
-                      {item.name}
-                    </span>
-                  );
-                })}
+              {suggestedList.map((item, index) => {
+                return (
+                  <span
+                    key={index}
+                    onClick={() => handleBreedClickFromModal(item.id)}
+                  >
+                    {item.name}
+                  </span>
+                );
+              })}
             </div>
+            <button onClick={handleRefreshSuggestions}>
+              refresh suggestions
+            </button>
           </BreedsContainer>
           <ButtonsContainer>
             <button onClick={() => copy(selected.url)} ref={urlButton}>
@@ -106,4 +117,4 @@ const HomeModal = () => {
   );
 };
 
-export default HomeModal;
+export default CatsModal;

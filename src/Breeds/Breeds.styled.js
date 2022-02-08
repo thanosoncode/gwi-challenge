@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const Container = styled.div`
   position: relative;
@@ -14,9 +15,10 @@ export const Grid = styled.div`
   row-gap: 40px;
   justify-content: center;
   padding: 20px 40px;
+  color: ${({ theme }) => theme.accent};
 `;
 
-export const GridItem = styled.div`
+export const GridItem = styled(motion.div)`
   width: 200px;
   height: 200px;
   text-align: center;
