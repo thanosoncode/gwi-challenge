@@ -20,7 +20,8 @@ export const Grid = styled.div`
 
   @media (max-width: 500px) {
     grid-template-columns: repeat(auto-fill, 180px);
-    gap: 10px;
+    column-gap: 10px;
+    row-gap: 20px;
     padding: 20px 0;
   }
 `;
