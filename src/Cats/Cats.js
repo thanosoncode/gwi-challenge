@@ -1,6 +1,5 @@
 import React from "react";
 import { useGlobalContext } from "../context";
-import CatsModal from "../CatsModal/CatsModal";
 import Spinner from "../Spinner/Spinner";
 import { Container, Grid, GridItem, Button } from "./Cats.styled";
 import { motion } from "framer-motion";
@@ -10,7 +9,7 @@ import errorImage from "../assets/images/error.gif";
 
 const Cats = () => {
   const {
-    state: { catList, imagesAmount, showCatsModal, isLoading, error },
+    state: { catList, imagesAmount, isLoading, error },
     handleCatImageClick,
     handleLoadMoreClick,
   } = useGlobalContext();
@@ -23,11 +22,15 @@ const Cats = () => {
   }
   if (catList) {
     return (
-      <Container>
+      <Container
+        as={motion.div}
+        initial={{ x: "-100vw" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-100vw" }}
+      >
         <Grid>
           {catList.slice(0, imagesAmount).map((item, indx) => {
             const { url, name, id } = item;
-            console.log(indx);
             return (
               <GridItem
                 as={motion.div}
@@ -51,7 +54,6 @@ const Cats = () => {
           })}
         </Grid>
         <Button onClick={handleLoadMoreClick}>load more</Button>
-        {showCatsModal && <CatsModal />}
       </Container>
     );
   }

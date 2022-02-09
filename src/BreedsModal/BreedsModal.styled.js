@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled(motion.div)`
   position: fixed;
   inset: 0;
   display: flex;
@@ -51,6 +51,11 @@ export const Modal = styled(motion.div)`
   img:hover {
     opacity: 0.9;
     transform: scale(1.1);
+  }
+
+  @media (max-width: 500px) {
+    padding: 5px;
+    margin: 5px;
   }
 `;
 

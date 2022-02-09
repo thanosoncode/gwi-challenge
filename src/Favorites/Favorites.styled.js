@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   position: relative;
   min-height: 100vh;
   max-width: 1000px;
@@ -21,7 +22,7 @@ export const Grid = styled.div`
   gap: 10px;
 `;
 
-export const GridItem = styled.div`
+export const GridItem = styled(motion.div)`
   width: 200px;
   height: 200px;
 

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Cats from "./Cats/Cats";
-import Breeds from "./Breeds/Breeds";
-import Favorites from "./Favorites/Favorites";
+import CatsView from "./Views/CatsView";
+import BreedsView from "./Views/BreedsView";
+import FavoritesView from "./Views/FavoritesView";
 import NotFound from "./NotFound/NotFound";
 import Navbar from "./Navbar/Navbar";
 import { ThemeProvider } from "styled-components";
@@ -20,12 +20,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <Navbar />
       <AnimatePresence exitBeforeEnter>
-        <Navbar />
         <Routes location={location} key={location.key}>
-          <Route path="/" element={<Cats />} />
-          <Route path="/breeds" element={<Breeds />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/" element={<CatsView />} />
+          <Route path="/breeds" element={<BreedsView />} />
+          <Route path="/favorites" element={<FavoritesView />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>

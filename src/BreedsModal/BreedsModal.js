@@ -3,6 +3,9 @@ import { useGlobalContext } from "../context";
 import { ModalContainer, Modal, CloseIcon } from "./BreedsModal.styled";
 import { HiOutlineX } from "react-icons/hi";
 import { motion } from "framer-motion";
+import Img from "react-cool-img";
+import loadingImage from "../assets/images/loading.gif";
+import errorImage from "../assets/images/error.gif";
 
 const BreedsModal = () => {
   const {
@@ -27,7 +30,12 @@ const BreedsModal = () => {
   }, [breedId, url]);
 
   return (
-    <ModalContainer>
+    <ModalContainer
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Modal
         as={motion.div}
         initial={{ opacity: 0, y: -1000 }}
@@ -42,8 +50,22 @@ const BreedsModal = () => {
           {breedItems &&
             breedItems.map((item, index) => {
               return (
-                <div key={index} onClick={() => handleBreedImageClick(item)}>
-                  <img src={item.url} alt="" />
+                <div
+                  key={index}
+                  onClick={() => handleBreedImageClick(item)}
+                  initial={{ x: "-100vw" }}
+                  animate={{ x: 0 }}
+                  transition={{
+                    delay: 0.3 * index,
+                  }}
+                  as={motion.div}
+                >
+                  <Img
+                    src={item.url}
+                    alt=""
+                    placeholder={loadingImage}
+                    error={errorImage}
+                  />
                 </div>
               );
             })}

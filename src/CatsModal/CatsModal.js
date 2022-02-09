@@ -12,7 +12,7 @@ import {
   InfoItem,
   InfoDiv,
 } from "./CatsModal.styled";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const CatsModal = () => {
   const {

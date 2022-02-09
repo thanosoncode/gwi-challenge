@@ -1,5 +1,4 @@
 import React from "react";
-import BreedsModal from "../BreedsModal/BreedsModal";
 import { useGlobalContext } from "../context";
 import Spinner from "../Spinner/Spinner";
 import { Container, Grid, GridItem } from "./Breeds.styled";
@@ -10,7 +9,7 @@ import errorImage from "../assets/images/error.gif";
 
 const Breeds = () => {
   const {
-    state: { breedList, showBreedsModal, isLoading, error },
+    state: { breedList, isLoading, error },
 
     handleBreedClick,
   } = useGlobalContext();
@@ -23,7 +22,12 @@ const Breeds = () => {
   }
   if (breedList) {
     return (
-      <Container>
+      <Container
+        as={motion.div}
+        initial={{ x: "-100vw" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-100vw" }}
+      >
         <Grid>
           {breedList.map((item, index) => {
             const { image, name } = item;
@@ -52,7 +56,6 @@ const Breeds = () => {
             );
           })}
         </Grid>
-        {showBreedsModal && <BreedsModal />}
       </Container>
     );
   }

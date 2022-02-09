@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const Modal = styled.div`
+export const Modal = styled(motion.div)`
   background: white;
 
   border-radius: 5px;
@@ -9,6 +10,11 @@ export const Modal = styled.div`
   position: relative;
   width: 80%;
   height: 80%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 90%;
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -18,6 +24,7 @@ export const ImageWrapper = styled.div`
   img {
     display: block;
     object-fit: cover;
+    object-position: center;
     width: 100%;
     height: 100%;
   }

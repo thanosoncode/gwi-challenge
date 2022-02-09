@@ -35,7 +35,6 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === "breed-selected-from-modal") {
-    console.log(action.payload);
     return {
       ...state,
       breedId: action.payload,

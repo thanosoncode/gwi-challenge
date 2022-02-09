@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 export const ModalContainer = styled(motion.div)`
   position: fixed;
   inset: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
 `;
 
 export const Modal = styled(motion.div)`
@@ -19,6 +21,11 @@ export const Modal = styled(motion.div)`
   position: relative;
   color: ${({ theme }) => theme.color};
   background: ${({ theme }) => theme.bg2};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin: 5px;
+  }
 `;
 
 export const CloseIcon = styled.div`
@@ -39,6 +46,9 @@ export const ImageWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media (max-width: 768px) {
+    width: 380px;
   }
 `;
 

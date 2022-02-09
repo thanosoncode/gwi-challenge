@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGlobalContext } from "../context";
@@ -47,7 +48,9 @@ const Navbar = () => {
           Themes
         </Theme>
       </Center>
-      {showThemesModal && <ThemesModal position={position} />}
+      <AnimatePresence>
+        {showThemesModal && <ThemesModal position={position} />}
+      </AnimatePresence>
     </Nav>
   );
 };
