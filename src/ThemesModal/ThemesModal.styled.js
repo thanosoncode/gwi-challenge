@@ -13,10 +13,14 @@ export const Ul = styled(motion.ul)`
   background-color: ${({ theme }) => theme.bg2};
   padding: 6px 14px;
   border-radius: 5px;
-  gap: 8px;
+
   box-shadow: 0 4px 14px ${({ theme }) => theme.bg};
   z-index: 5;
   width: 160px;
+
+  li {
+    margin-bottom: 8px;
+  }
 `;
 
 export const Li = styled.li`
