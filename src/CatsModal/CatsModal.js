@@ -53,7 +53,7 @@ const CatsModal = () => {
         </ImageWrapper>
         <Content>
           <InfoDiv>
-            {selected.breeds.length > 0 ? (
+            {selected?.breeds?.length > 0 ? (
               <div>
                 <h5>{selected.breeds[0].name}</h5>
                 {Object.entries(selected.breeds[0])

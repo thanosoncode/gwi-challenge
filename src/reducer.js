@@ -28,6 +28,9 @@ const reducer = (state, action) => {
   if (action.type === "close-breed-modal") {
     return { ...state, showBreedsModal: false };
   }
+  if (action.type === "SET_SELECTED_BREED_NAME") {
+    return { ...state, selectedBreedName: action.payload };
+  }
   if (action.type === "add-to-favorites") {
     return {
       ...state,

@@ -9,7 +9,7 @@ import errorImage from "../assets/images/error.gif";
 
 const BreedsModal = () => {
   const {
-    state: { breedId },
+    state: { breedId, selectedBreedName },
     handleBreedImageClick,
     handleBreedModalClose,
   } = useGlobalContext();
@@ -45,7 +45,7 @@ const BreedsModal = () => {
         <CloseIcon onClick={handleBreedModalClose}>
           <HiOutlineX />
         </CloseIcon>
-        <h5>{breedItems && breedItems[0]?.breeds[0]?.name}</h5>
+        <h5>{selectedBreedName}</h5>
         <section>
           {breedItems &&
             breedItems.map((item, index) => {

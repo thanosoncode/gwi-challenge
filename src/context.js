@@ -23,6 +23,7 @@ const initialState = {
   showThemesModal: false,
   selected: null,
   breedId: null,
+  selectedBreedName: "",
   favoriteId: null,
   theme: light,
   themes: [dark, light, rainbow, coal, purple, eclipse],
@@ -57,6 +58,7 @@ export const AppContextProvider = ({ children }) => {
 
   const handleBreedClick = (item) => {
     const id = item.id;
+    dispatch({ type: "SET_SELECTED_BREED_NAME", payload: item.name });
     dispatch({ type: "breed-selected-from-breed-view", payload: id });
   };
 
